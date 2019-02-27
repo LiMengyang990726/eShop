@@ -1,0 +1,2 @@
+export const FB_POST_REQUEST = 'FB_POST_REQUEST';
+export const FB_POST_RECEIVE = 'FB_POST_RECEIVE';

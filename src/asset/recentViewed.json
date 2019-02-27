@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Tian Yi Dian",
+    "canteen": "Canteen 13",
+    "canteenStatus": "closed",
+    "style": "Chinese",
+    "img": "https://www.londonperfect.com/blog/wp-content/uploads/2017/05/MG_9289-e1494511669840.jpg",
+    "status": "normal"
+  },
+  {
+    "name": "Jiu Li Xiang",
+    "canteen": "Canteen 11",
+    "canteenStatus": "open",
+    "style": "Japanese",
+    "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4EFwwj7C5kR5McpZLAuuawCzu1WosSG6PDnYcuIFkDcRA8j0XCg",
+    "status": "crowded"
+  },
+  {
+    "name": "Western Food",
+    "canteen": "Canteen 14",
+    "canteenStatus": "open",
+    "style": "Western",
+    "img": "https://www.gulfhotelbahrain.com/sites/default/files/styles/1140x469/public/1_3.jpg?itok=MICGCezu",
+    "status": "normal"
+  }
+]

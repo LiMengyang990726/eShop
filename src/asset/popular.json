@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Tian Yi Dian",
+    "canteen": "Canteen 13",
+    "canteenStatus": "closed",
+    "style": "Chinese",
+    "img": "https://www.londonperfect.com/blog/wp-content/uploads/2017/05/MG_9289-e1494511669840.jpg",
+    "status": "normal"
+  },
+  {
+    "name": "Jiu Li Xiang",
+    "canteen": "Canteen 9",
+    "canteenStatus": "open",
+    "style": "Chinese,SiChuan",
+    "img": "https://www.dexigner.com/images/article/25390/Simply_Italian_Restaurant_Hong_Kong_03.jpg",
+    "status": "flooded"
+  },
+  {
+    "name": "Western Food",
+    "canteen": "Canteen 14",
+    "canteenStatus": "open",
+    "style": "Western",
+    "img": "http://retaildesignblog.net/wp-content/uploads/2013/08/Gaga-restaurant-by-COORDINATON-ASIA-Shanghai.jpg",
+    "status": "normal"
+  }
+]

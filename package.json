@@ -1,0 +1,43 @@
+{
+  "name": "web",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "dependencies": {
+    "@material-ui/core": "latest",
+    "@material-ui/icons": "latest",
+    "@material-ui/styles": "^3.0.0-alpha.8",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "classnames": "latest",
+    "history": "latest",
+    "jss": "next",
+    "jss-nested": "latest",
+    "mdi-material-ui": "^5.7.0",
+    "node-forge": "latest",
+    "prop-types": "^15.6.2",
+    "randomcolor": "^0.5.3",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0",
+    "react-jss": "^8.6.1",
+    "react-lorem-component": "^0.13.0",
+    "react-redux": "^5.1.1",
+    "react-router": "^4.3.1",
+    "react-router-dom": "latest",
+    "react-scripts": "^2.1.1",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}
