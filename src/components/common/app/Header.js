@@ -1,139 +1,449 @@
 import React from 'react';
-import * as PropTypes from 'prop-types';
-import classNames from 'classnames';
-import {withStyles} from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
-import Link from '../Link';
-import Sidebar from "./Sidebar";
-
-const drawerWidth = 240;
+import MenuIcon from '@material-ui/icons/Menu';
+import InputBase from '@material-ui/core/InputBase';
+import { fade } from '@material-ui/core/styles/colorManipulator';
+import SearchIcon from '@material-ui/icons/Search';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Slide from '@material-ui/core/Slide';
+import TextField from '@material-ui/core/TextField';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import SwipeableViews from 'react-swipeable-views';
 
 const styles = theme => ({
-    root: {
-        display: 'flex'
+  root: {
+    flexGrow: 1,
+  },
+  grow: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginLeft: -12,
+    marginRight: 20,
+  },
+  search: {
+    position: 'relative',
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: fade(theme.palette.common.white, 0.15),
+    '&:hover': {
+      backgroundColor: fade(theme.palette.common.white, 0.25),
     },
-    appBar: {
-        transition: theme.transitions.create(['margin', 'width'], {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.leavingScreen
-        })
+    marginRight: theme.spacing.unit * 2,
+    marginLeft: 0,
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      marginLeft: theme.spacing.unit * 3,
+      width: 'auto',
     },
-    appBarShift: {
-        width: `calc(100% - ${drawerWidth}px)`,
-        marginLeft: drawerWidth,
-        transition: theme.transitions.create(['margin', 'width'], {
-            easing: theme.transitions.easing.easeOut,
-            duration: theme.transitions.duration.enteringScreen
-        })
+  },
+  searchIcon: {
+    width: theme.spacing.unit * 9,
+    height: '100%',
+    position: 'absolute',
+    pointerEvents: 'none',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  inputRoot: {
+    color: 'inherit',
+    width: '100%',
+  },
+  inputInput: {
+    paddingTop: theme.spacing.unit,
+    paddingRight: theme.spacing.unit,
+    paddingBottom: theme.spacing.unit,
+    paddingLeft: theme.spacing.unit * 10,
+    transition: theme.transitions.create('width'),
+    width: '100%',
+    [theme.breakpoints.up('md')]: {
+      width: 200,
     },
-    menuButton: {
-        marginLeft: 12,
-        marginRight: 20
-    },
-    hide: {
-        display: 'none'
-    },
-    drawer: {
-        width: drawerWidth,
-        flexShrink: 0
-    },
-    drawerPaper: {
-        width: drawerWidth,
-        backgroundColor: theme.palette.grey[50]
-    },
-    drawerHeader: {
-        display: 'flex',
-        alignItems: 'center',
-        padding: '0 8px',
-        ...theme.mixins.toolbar,
-        justifyContent: 'flex-end'
-    },
-    logo: {
-        marginLeft: -12,
-        marginRight: '8rem',
-    },
-    content: {
-        flexGrow: 1,
-        padding: theme.spacing.unit * 3,
-        transition: theme.transitions.create('margin', {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.leavingScreen
-        }),
-        marginLeft: -drawerWidth
-    },
-    contentShift: {
-        transition: theme.transitions.create('margin', {
-            easing: theme.transitions.easing.easeOut,
-            duration: theme.transitions.duration.enteringScreen
-        }),
-        marginLeft: 0
-    },
-    img: {
-        height: 36,
-        '@media (max-width: 840px)': {
-            height: 0
-        }
-    },
-    headerItem: {
-        marginRight: 20
-    }
+  },
+  popup: {
+    width: "100%",
+    height: "40%",
+    margin: "auto",
+  },
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: "100%",
+  },
 });
 
-class Header extends React.Component {
-    state = {
-        open: false
-    };
-
-    handleDrawerOpen = () => {
-        this.setState({open: true});
-    };
-
-    handleDrawerClose = () => {
-        this.setState({open: false});
-    };
-
-    render() {
-        const {classes} = this.props;
-        const {open} = this.state;
-
-        return (
-            <div className={classes.root}>
-                <AppBar
-                    position="fixed"
-                    color="default"
-                    className={classNames(classes.appBar, {
-                        [classes.appBarShift]: open
-                    })}
-                >
-                    <Toolbar disableGutters={!open}>
-                        <IconButton
-                            color="inherit"
-                            aria-label="Open drawer"
-                            onClick={this.handleDrawerOpen}
-                            className={classNames(classes.menuButton, open && classes.hide)}
-                            disableRipple
-                        >
-                            <img
-                                className={classes.img}
-                                src={require('../../../asset/logo.svg')}
-                                alt={'Outfox'}
-                            />
-                        </IconButton>
-                        <Link className={classes.logo} aira-label={'Outfox'} href={'/'} noWrap>
-                            Outfox
-                        </Link>
-                    </Toolbar>
-                </AppBar>
-                <Sidebar on={open} handleClose={this.handleDrawerClose}/>
-            </div>
-        );
-    }
+function Transition(props) {
+  return <Slide direction="up" {...props} />;
 }
 
-Header.propTypes = {
-    classes: PropTypes.object.isRequired,
+function TabContainer(props) {
+  const { children, dir } = props;
+
+  return (
+    <Typography component="div" dir={dir} style={{ padding: 8 * 3 }}>
+      {children}
+    </Typography>
+  );
+}
+
+TabContainer.propTypes = {
+  children: PropTypes.node.isRequired,
+  dir: PropTypes.string.isRequired,
 };
 
-export default withStyles(styles)(Header);
+class ButtonAppBar extends React.Component {
+
+  state = {
+    openLogin: false,
+    openSignup:false,
+    value: 0,
+  };
+
+  handleClickLoginOpen = () => {
+    this.setState({ openLogin: true });
+  };
+
+  handleLoginClose = () => {
+    this.setState({ openLogin: false });
+  };
+
+  handleClickSignupOpen = () => {
+    this.setState({ openSignup: true });
+  };
+
+  handleSignupClose = () => {
+    this.setState({ openSignup: false });
+  };
+
+  handleChange = (event, value) => {
+    this.setState({ value });
+  };
+
+  handleChangeIndex = index => {
+    this.setState({ value: index });
+  };
+
+  render() {
+    const { classes } = this.props;
+
+    return (
+      <div className={classes.root}>
+        <AppBar position="static">
+          <Toolbar>
+            <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="h6" color="inherit" className={classes.grow}>
+              A Pen For You
+          </Typography>
+            <div className={classes.search}>
+              <div className={classes.searchIcon}>
+                <SearchIcon />
+              </div>
+              <InputBase
+                placeholder="Search…"
+                classes={{
+                  root: classes.inputRoot,
+                  input: classes.inputInput,
+                }}
+              />
+            </div>
+
+            <div>
+              <Button color="inherit" onClick={this.handleClickLoginOpen}>
+                Login
+              </Button>
+              <Dialog
+                open={this.state.openLogin}
+                TransitionComponent={Transition}
+                keepMounted
+                onClose={this.handleLoginClose}
+                aria-labelledby="alert-dialog-slide-title"
+                aria-describedby="alert-dialog-slide-description"
+              >
+                <AppBar position="static" color="default">
+                  <Tabs
+                    value={this.state.value}
+                    onChange={this.handleChange}
+                    indicatorColor="primary"
+                    textColor="primary"
+                    variant="fullWidth"
+                  >
+                    <Tab label="As merchants" />
+                    <Tab label="As customers" />
+                  </Tabs>
+                </AppBar>
+                <SwipeableViews
+                  axis={classes.direction === 'rtl' ? 'x-reverse' : 'x'}
+                  index={this.state.value}
+                  onChangeIndex={this.handleChangeIndex}
+                >
+                  <TabContainer dir={classes.direction}>
+                    <DialogTitle id="alert-dialog-slide-title">
+                      {"Log in to your account"}
+                    </DialogTitle>
+                    <DialogContent>
+                      <DialogContentText id="alert-dialog-slide-description" >
+                        <TextField
+                          required
+                          id="outlined-required"
+                          label="ID"
+                          defaultValue="Your account ID"
+                          className={classes.textField}
+                          margin="normal"
+                          variant="outlined"
+                        />
+                      </DialogContentText>
+                    </DialogContent>
+                    <DialogContent>
+                      <DialogContentText id="alert-dialog-slide-description" >
+                        <TextField
+                          required
+                          id="outlined-required"
+                          label="Password"
+                          defaultValue="Password"
+                          className={classes.textField}
+                          margin="normal"
+                          variant="outlined"
+                        />
+                      </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                      <Button onClick={this.handleLoginClose} color="primary">
+                        Login
+                      </Button>
+                    </DialogActions>
+                  </TabContainer>
+
+                  <TabContainer dir={classes.direction}>
+                  <DialogTitle id="alert-dialog-slide-title">
+                      {"Log in to your account"}
+                    </DialogTitle>
+                    <DialogContent>
+
+                      <DialogContentText id="alert-dialog-slide-description" >
+                        <TextField
+                          required
+                          id="outlined-required"
+                          label="ID"
+                          defaultValue="Your account ID"
+                          className={classes.textField}
+                          margin="normal"
+                          variant="outlined"
+                        />
+                      </DialogContentText>
+                    </DialogContent>
+                    <DialogContent>
+                      <DialogContentText id="alert-dialog-slide-description" >
+                        <TextField
+                          required
+                          id="outlined-required"
+                          label="Password"
+                          defaultValue="Password"
+                          className={classes.textField}
+                          margin="normal"
+                          variant="outlined"
+                        />
+                      </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                      <Button onClick={this.handleClose} color="primary">
+                        Login
+                      </Button>
+                    </DialogActions>
+                  </TabContainer>
+                </SwipeableViews>
+
+              </Dialog>
+            </div>
+
+            <div>
+              <Button color="inherit" onClick={this.handleClickSignupOpen}>
+                Signup
+              </Button>
+              <Dialog
+                open={this.state.openSignup}
+                TransitionComponent={Transition}
+                keepMounted
+                onClose={this.handleSignupClose}
+                aria-labelledby="alert-dialog-slide-title"
+                aria-describedby="alert-dialog-slide-description"
+              >
+                <AppBar position="static" color="default">
+                  <Tabs
+                    value={this.state.value}
+                    onChange={this.handleChange}
+                    indicatorColor="primary"
+                    textColor="primary"
+                    variant="fullWidth"
+                  >
+                    <Tab label="As merchants" />
+                    <Tab label="As customers" />
+                  </Tabs>
+                </AppBar>
+                <SwipeableViews
+                  axis={classes.direction === 'rtl' ? 'x-reverse' : 'x'}
+                  index={this.state.value}
+                  onChangeIndex={this.handleChangeIndex}
+                >
+                  <TabContainer dir={classes.direction}>
+                    <DialogTitle id="alert-dialog-slide-title">
+                      {"Sign up for our shop"}
+                    </DialogTitle>
+                    <DialogContent>
+                      <DialogContentText id="alert-dialog-slide-description" >
+                        <TextField
+                          required
+                          id="outlined-required"
+                          label="ID"
+                          defaultValue="Your account ID"
+                          className={classes.textField}
+                          margin="normal"
+                          variant="outlined"
+                        />
+                      </DialogContentText>
+                    </DialogContent>
+                    <DialogContent>
+                      <DialogContentText id="alert-dialog-slide-description" >
+                        <TextField
+                          required
+                          id="outlined-required"
+                          label="Password"
+                          defaultValue="Password"
+                          className={classes.textField}
+                          margin="normal"
+                          variant="outlined"
+                        />
+                      </DialogContentText>
+                    </DialogContent>
+                    <DialogContent>
+                      <DialogContentText id="alert-dialog-slide-description" >
+                        <TextField
+                          required
+                          id="outlined-required"
+                          label="Confirm Password"
+                          defaultValue="Confirm Password"
+                          className={classes.textField}
+                          margin="normal"
+                          variant="outlined"
+                        />
+                      </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                      <Button onClick={this.handleSignupClose} color="primary">
+                        Signup
+                      </Button>
+                    </DialogActions>
+                  </TabContainer>
+
+                  <TabContainer dir={classes.direction}>
+                  <DialogTitle id="alert-dialog-slide-title">
+                      {"Sign up for our shop"}
+                    </DialogTitle>
+                    <DialogContent>
+
+                      <DialogContentText id="alert-dialog-slide-description" >
+                        <TextField
+                          required
+                          id="outlined-required"
+                          label="ID"
+                          defaultValue="Your account ID"
+                          className={classes.textField}
+                          margin="normal"
+                          variant="outlined"
+                        />
+                      </DialogContentText>
+                    </DialogContent>
+                    <DialogContent>
+                      <DialogContentText id="alert-dialog-slide-description" >
+                        <TextField
+                          required
+                          id="outlined-required"
+                          label="Password"
+                          defaultValue="Password"
+                          className={classes.textField}
+                          margin="normal"
+                          variant="outlined"
+                        />
+                      </DialogContentText>
+                    </DialogContent>
+                    <DialogContent>
+                      <DialogContentText id="alert-dialog-slide-description" >
+                        <TextField
+                          required
+                          id="outlined-required"
+                          label="Confirm Password"
+                          defaultValue="Confirm Password"
+                          className={classes.textField}
+                          margin="normal"
+                          variant="outlined"
+                        />
+                      </DialogContentText>
+                    </DialogContent>
+                    <DialogContent>
+                      <DialogContentText id="alert-dialog-slide-description" >
+                        <TextField
+                          required
+                          id="outlined-required"
+                          label="Credit Card Number"
+                          defaultValue="E.g. 1234 4321 1234 4321"
+                          className={classes.textField}
+                          margin="normal"
+                          variant="outlined"
+                        />
+                      </DialogContentText>
+                    </DialogContent>
+                    <DialogContent>
+                      <DialogContentText id="alert-dialog-slide-description" >
+                        <TextField
+                          required
+                          id="outlined-required"
+                          label="Credit Card CVV"
+                          defaultValue="E.g. 123"
+                          className={classes.textField}
+                          margin="normal"
+                          variant="outlined"
+                        />
+                      </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                      <Button onClick={this.handleSignupClose} color="primary">
+                        Signup
+                      </Button>
+                    </DialogActions>
+                  </TabContainer>
+                </SwipeableViews>
+
+              </Dialog>
+            </div>
+
+
+
+
+          </Toolbar>
+        </AppBar>
+      </div>
+    );
+  }
+}
+
+ButtonAppBar.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(ButtonAppBar);
+
+
+
+

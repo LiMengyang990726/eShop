@@ -4,7 +4,7 @@ import createBrowserHistory from 'history/createBrowserHistory';
 
 import PageNotFound from './components/common/app/PageNotFound';
 import HomeApp from './components/home/';
-import EventApp from './components/event/';
+import MerchantApp from './components/merchant/';
 import LostNFoundRouter from './components/lostfound/urls'
 import withStyles from '@material-ui/core/styles/withStyles';
 import Header from './components/common/app/Header';
@@ -37,7 +37,7 @@ const RootRouter = ({ classes }) => (
 				<div className={classes.toolbar} />
 				<Switch>
 					<Route exact path="/" component={HomeApp} />
-					<Route path="/events" component={EventApp} />
+					<Route path="/merchants" component={MerchantApp} />
 					<Route path="/lost-and-found" component={LostNFoundRouter}/>
 					<Route path="/canteen" component={CanteenRouter}/>
 					<Route component={PageNotFound} />

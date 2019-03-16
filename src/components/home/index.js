@@ -1,23 +1,15 @@
 import React from 'react';
 import * as PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
-import Main from "./Cards";
+import Main from "./Main"
 
-const styles = () => ({
-    root: {
-        flexGrow: 1,
-    },
-});
 
 const HomeApp = ({classes}) => (
-        <div className={classes.root}>
-            <Main/>
-            {/*{ReactDom.createPortal(<Footer/>, document.getElementById("outfox-footer-container"))}*/}
-        </div>
+        <Main/>
     );
 
 HomeApp.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(HomeApp);
+export default withStyles()(HomeApp);
