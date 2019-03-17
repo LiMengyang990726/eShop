@@ -4,7 +4,7 @@ import registerServiceWorker from './registerServiceWorker';
 import RootRouter from './urls';
 import store from './redux/store/configStore';
 import {Provider} from 'react-redux';
-import './asset/css/styles.css';
+import './components/asset/css/styles.css';
 import JssRegistry from './JssRegistry';
 
 ReactDOM.render(

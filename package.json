@@ -9,6 +9,7 @@
     "@material-ui/styles": "^3.0.0-alpha.8",
     "@types/react": "latest",
     "@types/react-dom": "latest",
+    "axios": "^0.18.0",
     "classnames": "latest",
     "history": "latest",
     "jss": "next",

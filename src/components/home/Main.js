@@ -31,9 +31,7 @@ const styles = theme => ({
   root: {
     alignItems: 'center',
   },
-  canvas: {
-    width: "100%"
-  },
+  
   search: {
     position: 'relative',
     boxShadow: theme.shadows[1],
@@ -44,7 +42,7 @@ const styles = theme => ({
     "&:focus": {
       boxShadow: theme.shadows[3],
     },
-    marginTop: "5%",
+    marginTop:"3%",
     marginLeft: "10%",
     width: '80%',
   },
@@ -99,9 +97,7 @@ function home(props) {
 
   return (
     <div className={classes.root}>
-      <img className={classes.canvas}
-        src={require('../asset/landingPic.png')}
-      />
+      
 
       <div className={classes.search}>
         <div className={classes.searchIcon}>
@@ -121,7 +117,7 @@ function home(props) {
       </div>
 
       <div className={classes.hot}>
-      <Typography variant="h3" gutterBottom stype={{marginLeft:"10%"}}>
+      <Typography variant="h4" gutterBottom stype={{marginLeft:"10%"}}>
         Featured
       </Typography>
       </div>
@@ -151,7 +147,7 @@ function home(props) {
       </div>
 
       <div className={classes.hot}>
-      <Typography variant="h3" gutterBottom stype={{marginLeft:"10%"}}>
+      <Typography variant="h4" gutterBottom stype={{marginLeft:"10%"}}>
         Hot
       </Typography>
 

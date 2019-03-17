@@ -5,9 +5,9 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import FunctionCard from '../common/FunctionCard'
 import CounterGrid from './CounterGird'
 import CounterCard from './CounterCard'
-import recentViewed from '../../asset/recentViewed.json'
-import popular from '../../asset/popular.json'
-import canteenInfo from '../../asset/canteenInfo.json'
+import recentViewed from '../asset/recentViewed.json'
+import popular from '../asset/popular.json'
+import canteenInfo from '../asset/canteenInfo.json'
 import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
 

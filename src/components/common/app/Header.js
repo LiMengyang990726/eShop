@@ -5,8 +5,6 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import InputBase from '@material-ui/core/InputBase';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import SearchIcon from '@material-ui/icons/Search';
@@ -27,6 +25,9 @@ const styles = theme => ({
   },
   grow: {
     flexGrow: 1,
+  },
+  canvas: {
+    width: "100%"
   },
   menuButton: {
     marginLeft: -12,
@@ -118,6 +119,12 @@ class ButtonAppBar extends React.Component {
     this.setState({ openLogin: false });
   };
 
+  handleLoginClick = () => {
+    this.setState({ openLogin: false });
+    this.LogInTracker = false;
+    console.log(this.LogInTracker);
+  };
+
   handleClickSignupOpen = () => {
     this.setState({ openSignup: true });
   };
@@ -141,9 +148,6 @@ class ButtonAppBar extends React.Component {
       <div className={classes.root}>
         <AppBar position="static">
           <Toolbar>
-            <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
-              <MenuIcon />
-            </IconButton>
             <Typography variant="h6" color="inherit" className={classes.grow}>
               A Pen For You
           </Typography>
@@ -220,7 +224,7 @@ class ButtonAppBar extends React.Component {
                       </DialogContentText>
                     </DialogContent>
                     <DialogActions>
-                      <Button onClick={this.handleLoginClose} color="primary">
+                      <Button onClick={this.handleLoginClick} color="primary">
                         Login
                       </Button>
                     </DialogActions>
@@ -258,7 +262,7 @@ class ButtonAppBar extends React.Component {
                       </DialogContentText>
                     </DialogContent>
                     <DialogActions>
-                      <Button onClick={this.handleClose} color="primary">
+                      <Button onClick={this.handleLoginClose} color="primary">
                         Login
                       </Button>
                     </DialogActions>
@@ -432,6 +436,9 @@ class ButtonAppBar extends React.Component {
 
 
           </Toolbar>
+          <img className={classes.canvas}
+        src={require('../../asset/landingPic.png')}
+      />
         </AppBar>
       </div>
     );
