@@ -18,6 +18,7 @@ import TextField from '@material-ui/core/TextField';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import SwipeableViews from 'react-swipeable-views';
+import axios from 'axios';
 
 const styles = theme => ({
   root: {
@@ -108,8 +109,27 @@ class ButtonAppBar extends React.Component {
   state = {
     openLogin: false,
     openSignup:false,
-    value: 0,
+    value:0,
+    merchantExist: '',
+    merchantID: ''
   };
+
+  componentDidMount(){
+    axios.get('http://localhost:8080/checkMerchantExist/{merchantID}')
+    .then(res =>{
+      console.log("here is executing" + res)
+      this.setState({
+        merchantExist: res.data
+      })
+    })
+  }
+
+  updateMerchantID(evt) {
+    this.setState({
+      merchantID: evt.target.value
+    });
+    console.log(this.state.merchantID);
+  }
 
   handleClickLoginOpen = () => {
     this.setState({ openLogin: true });
@@ -121,8 +141,6 @@ class ButtonAppBar extends React.Component {
 
   handleLoginClick = () => {
     this.setState({ openLogin: false });
-    this.LogInTracker = false;
-    console.log(this.LogInTracker);
   };
 
   handleClickSignupOpen = () => {
@@ -203,10 +221,13 @@ class ButtonAppBar extends React.Component {
                           required
                           id="outlined-required"
                           label="ID"
-                          defaultValue="Your account ID"
+                          defaultValue=""
                           className={classes.textField}
                           margin="normal"
                           variant="outlined"
+                          value={this.state.merchantID}
+                          onChange={evt => this.updateMerchantID(evt)}
+                          key={this.state.merchantExist}
                         />
                       </DialogContentText>
                     </DialogContent>
@@ -216,7 +237,7 @@ class ButtonAppBar extends React.Component {
                           required
                           id="outlined-required"
                           label="Password"
-                          defaultValue="Password"
+                          defaultValue=""
                           className={classes.textField}
                           margin="normal"
                           variant="outlined"
@@ -227,7 +248,13 @@ class ButtonAppBar extends React.Component {
                       <Button onClick={this.handleLoginClick} color="primary">
                         Login
                       </Button>
-                    </DialogActions>
+                    </DialogActions> 
+                    {this.state.merchantExist ? (
+                      <div/>
+                      ) : (
+                        <DialogContent ><Typography variant="h5">Account does not exist.</Typography></DialogContent>
+                    )}
+                    
                   </TabContainer>
 
                   <TabContainer dir={classes.direction}>

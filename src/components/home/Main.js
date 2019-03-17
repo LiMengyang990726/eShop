@@ -155,7 +155,7 @@ function home(props) {
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image="/static/images/cards/contemplative-reptile.jpg"
+          image="https://www.texascrazy.com/wp-content/uploads/2016/02/texas-pen-set-f.jpg"
           title="Contemplative Reptile"
         />
         <CardContent>

@@ -26,10 +26,12 @@ function ButtonAppBar(props) {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" color="inherit" className={classes.grow}>
-            News
+            Well come back!
           </Typography>
-          <Button color="inherit">Login</Button>
         </Toolbar>
+        <img className={classes.canvas}
+        src={require('../../asset/landingPic.png')}
+      />
       </AppBar>
     </div>
   );

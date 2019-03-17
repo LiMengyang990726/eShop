@@ -1,8 +1,8 @@
 import React from 'react';
 import * as PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
-import Main from "./Main"
-import Header from "../common/app/Header"
+import Main from "../home/Main";
+import Header from "../common/app/HeaderLoggedinCustomer";
 
 const HomeApp = ({classes}) => (
     <div>

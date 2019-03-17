@@ -1,25 +1,36 @@
-package com.example.demo.Entities;
+package com.example.demo.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "Customer")
 public class Customer {
 
     @Id
+    @Column(name = "customerID", unique = true)
     private String customerID;
-    private String password;
-    private String bank_account;
-    private String cvv;
 
-    public Customer(String customerID, String password, String bank_account, String cvv) {
+    @Column(name = "password")
+    private String password;
+
+    @Column(name = "bank_account")
+    private String bank_account;
+
+    @Column(name = "CVV")
+    private String CVV;
+
+    public Customer(String customerID, String password, String bank_account, String CVV) {
         this.customerID = customerID;
         this.password = password;
         this.bank_account = bank_account;
-        this.cvv = cvv;
+        this.CVV = CVV;
     }
 
-    public Customer() {
+    public Customer(){
+
     }
 
     public String getCustomerID() {
@@ -46,11 +57,11 @@ public class Customer {
         this.bank_account = bank_account;
     }
 
-    public String getCvv() {
-        return cvv;
+    public String getCVV() {
+        return CVV;
     }
 
-    public void setCvv(String cvv) {
-        this.cvv = cvv;
+    public void setCVV(String CVV) {
+        this.CVV = CVV;
     }
 }

@@ -8,6 +8,7 @@ import MerchantApp from './components/merchant/';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Header from './components/common/app/Header';
 import CanteenRouter from "./components/canteen/urls";
+import CustomerApp from "./components/customer/";
 import HeaderLoggedinMerchant from "./components/common/app/HeaderLoggedinMerchant";
 
 const history = createBrowserHistory();
@@ -52,14 +53,11 @@ class LoginControl extends React.Component {
 		
 		<Router history={history}>
 			<div className={classes.root}>
-				<LogInTrack isLoggedIn={isLoggedIn} />
-
-				<main className={classes.content}>
-					<div className={classes.toolbar} />
+				<main>
 					<Switch>
 						<Route exact path="/" component={HomeApp} />
 						<Route path="/merchants" component={MerchantApp} />
-						<Route path="/canteen" component={CanteenRouter} />
+						<Route path="/customer" component={CustomerApp} />
 						<Route component={PageNotFound} />
 					</Switch>
 				</main>

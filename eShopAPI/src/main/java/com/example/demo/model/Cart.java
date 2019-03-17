@@ -1,23 +1,32 @@
-package com.example.demo.Entities;
+package com.example.demo.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "Cart")
 public class Cart {
 
     @Id
+    @Column(name = "customerID")
     private String customerID;
-    private int productID;
-    private int qtyl;
 
-    public Cart(String customerID, int productID, int qtyl) {
+    @Column(name = "productID")
+    private int productID;
+
+    @Column(name = "qty")
+    private int qty;
+
+    public Cart(String customerID, int productID, int qty) {
         this.customerID = customerID;
         this.productID = productID;
-        this.qtyl = qtyl;
+        this.qty = qty;
     }
 
-    public Cart() {
+    public Cart(){
+
     }
 
     public String getCustomerID() {
@@ -36,11 +45,11 @@ public class Cart {
         this.productID = productID;
     }
 
-    public int getQtyl() {
-        return qtyl;
+    public int getQty() {
+        return qty;
     }
 
-    public void setQtyl(int qtyl) {
-        this.qtyl = qtyl;
+    public void setQty(int qty) {
+        this.qty = qty;
     }
 }
