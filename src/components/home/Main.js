@@ -12,6 +12,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
+import Grid from "@material-ui/core/Grid";
 
 const slideImages = [
   require("../asset/artisticSlideshow.jpg"),
@@ -31,7 +32,7 @@ const styles = theme => ({
   root: {
     alignItems: 'center',
   },
-  
+
   search: {
     position: 'relative',
     boxShadow: theme.shadows[1],
@@ -42,7 +43,7 @@ const styles = theme => ({
     "&:focus": {
       boxShadow: theme.shadows[3],
     },
-    marginTop:"3%",
+    marginTop: "3%",
     marginLeft: "10%",
     width: '80%',
   },
@@ -72,16 +73,16 @@ const styles = theme => ({
   slideshowContainer: {
     marginTop: "5%",
   },
-  slideshow:{
-    height:"600px",
+  slideshow: {
+    height: "600px",
   },
   divider: {
     marginTop: "5%",
     marginBottom: "5%"
   },
-  hot:{
-    marginLeft:"10%",
-    marginRight:"10%"
+  hot: {
+    marginLeft: "10%",
+    marginRight: "10%"
   },
   card: {
     maxWidth: 320,
@@ -97,7 +98,7 @@ function home(props) {
 
   return (
     <div className={classes.root}>
-      
+
 
       <div className={classes.search}>
         <div className={classes.searchIcon}>
@@ -117,8 +118,8 @@ function home(props) {
       </div>
 
       <div className={classes.hot}>
-      <Typography variant="h4" gutterBottom stype={{marginLeft:"10%"}}>
-        Featured
+        <Typography variant="h4" gutterBottom stype={{ marginLeft: "10%" }}>
+          Featured
       </Typography>
       </div>
 
@@ -126,17 +127,17 @@ function home(props) {
         <Slide {...properties}>
           <div className="each-slide">
             <div className={classes.slideshow} style={{ 'backgroundImage': `url(${slideImages[0]})` }}>
-              
+
             </div>
           </div>
           <div className="each-slide">
-            <div className={classes.slideshow} style={{ 'backgroundImage': `url(${slideImages[1]})`}}>
-              
+            <div className={classes.slideshow} style={{ 'backgroundImage': `url(${slideImages[1]})` }}>
+
             </div>
           </div>
           <div className="each-slide">
             <div className={classes.slideshow} style={{ 'backgroundImage': `url(${slideImages[2]})` }}>
-              
+
             </div>
           </div>
         </Slide>
@@ -147,34 +148,87 @@ function home(props) {
       </div>
 
       <div className={classes.hot}>
-      <Typography variant="h4" gutterBottom stype={{marginLeft:"10%"}}>
-        Hot
+        <Typography variant="h4" gutterBottom stype={{ marginLeft: "10%" }}>
+          Hot
       </Typography>
 
-      <Card className={classes.card}>
-      <CardActionArea>
-        <CardMedia
-          className={classes.media}
-          image="https://www.texascrazy.com/wp-content/uploads/2016/02/texas-pen-set-f.jpg"
-          title="Contemplative Reptile"
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            Lizard
-          </Typography>
-          <Typography component="p">
-            Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-            across all continents except Antarctica
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-      <CardActions>
-        <Button size="small" color="primary">
-          Learn More
-        </Button>
-      </CardActions>
-    </Card>
-    </div>
+        <Grid container spacing={24}>
+          <Grid item xs={4}>
+            <Card className={classes.card}>
+              <CardActionArea>
+                <CardMedia
+                  className={classes.media}
+                  image="https://www.texascrazy.com/wp-content/uploads/2016/02/texas-pen-set-f.jpg"
+                  title="Contemplative Reptile"
+                />
+                <CardContent>
+                  <Typography gutterBottom variant="h5" component="h2">
+                    Classical Wooden Pen
+                  </Typography>
+                  <Typography component="p">
+                    Consists of a metal nib with capillary channels, like that of a fountain pen, mounted on a handle or holder, often made of wood. A dip pen usually has no ink reservoir and must be repeatedly recharged with ink while drawing or writing. 
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+              <CardActions>
+                <Button size="small" color="primary">
+                  Add to cart
+                </Button>
+              </CardActions>
+            </Card>
+          </Grid>
+
+          <Grid item xs={4}>
+            <Card className={classes.card}>
+              <CardActionArea>
+                <CardMedia
+                  className={classes.media}
+                  image="https://www.texascrazy.com/wp-content/uploads/2016/02/texas-pen-set-f.jpg"
+                  title="Contemplative Reptile"
+                />
+                <CardContent>
+                  <Typography gutterBottom variant="h5" component="h2">
+                    Classical Wooden Pen
+                  </Typography>
+                  <Typography component="p">
+                    Consists of a metal nib with capillary channels, like that of a fountain pen, mounted on a handle or holder, often made of wood. A dip pen usually has no ink reservoir and must be repeatedly recharged with ink while drawing or writing.
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+              <CardActions>
+                <Button size="small" color="primary">
+                  Add to cart
+                </Button>
+              </CardActions>
+            </Card>
+          </Grid>
+
+          <Grid item xs={4}>
+            <Card className={classes.card}>
+              <CardActionArea>
+                <CardMedia
+                  className={classes.media}
+                  image="https://www.texascrazy.com/wp-content/uploads/2016/02/texas-pen-set-f.jpg"
+                  title="Contemplative Reptile"
+                />
+                <CardContent>
+                  <Typography gutterBottom variant="h5" component="h2">
+                    Classical Wooden Pen
+                  </Typography>
+                  <Typography component="p">
+                  Consists of a metal nib with capillary channels, like that of a fountain pen, mounted on a handle or holder, often made of wood. A dip pen usually has no ink reservoir and must be repeatedly recharged with ink while drawing or writing.
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+              <CardActions>
+                <Button size="small" color="primary">
+                  Add to cart
+                </Button>
+              </CardActions>
+            </Card>
+          </Grid>
+        </Grid>
+      </div>
     </div>
 
 

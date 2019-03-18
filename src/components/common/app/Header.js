@@ -18,7 +18,6 @@ import TextField from '@material-ui/core/TextField';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import SwipeableViews from 'react-swipeable-views';
-import axios from 'axios';
 
 const styles = theme => ({
   root: {
@@ -106,29 +105,34 @@ TabContainer.propTypes = {
 
 class ButtonAppBar extends React.Component {
 
-  state = {
-    openLogin: false,
-    openSignup:false,
-    value:0,
-    merchantExist: '',
-    merchantID: ''
-  };
-
-  componentDidMount(){
-    axios.get('http://localhost:8080/checkMerchantExist/{merchantID}')
-    .then(res =>{
-      console.log("here is executing" + res)
-      this.setState({
-        merchantExist: res.data
-      })
-    })
+  constructor(props) {
+    super(props);
+    this.merchantID = '';
+    this.merchantExist = true;
+    this.password = '';
+    this.passwordCorrect = true;
   }
 
+  state = {
+    openLogin: false,
+    openSignup: false,
+    value: 0,
+  };
+
   updateMerchantID(evt) {
+    this.merchantID = evt.target.value;
     this.setState({
       merchantID: evt.target.value
     });
-    console.log(this.state.merchantID);
+    console.log(this.merchantID);
+  }
+
+  updateMerchantPassword(evt) {
+    this.password = evt.target.value;
+    this.setState({
+      password: evt.target.value
+    });
+    console.log(this.password);
   }
 
   handleClickLoginOpen = () => {
@@ -139,8 +143,39 @@ class ButtonAppBar extends React.Component {
     this.setState({ openLogin: false });
   };
 
+  enterPressedPassword = (evt) =>{
+    var code = evt.keyCode || evt.which;
+    if(code === 13) { //13 is the enter keycode
+      var requestUrl = '/merchant/'+this.merchantID+'/password/'+this.password;
+      fetch(requestUrl)
+      .then(response => {
+        response.text().then(data => {
+          this.passwordCorrect = false;
+        })
+      })
+    } 
+    this.passwordCorrect = true;
+    console.log("If the password correct "+this.passwordCorrect);
+  }
+
+  enterPressedID = (evt) =>{
+    var code = evt.keyCode || evt.which;
+    if(code === 13) { //13 is the enter keycode
+      var requestUrl = '/merchant/'+this.merchantID;
+      fetch(requestUrl)
+      .then(response => {
+        response.text().then(data => {
+          this.merchantExist = false;
+        })
+      })
+    } 
+    this.merchantExist = true;
+    console.log("If the merchant exists "+this.passwordCorrect);
+  }
+
   handleLoginClick = () => {
     this.setState({ openLogin: false });
+    this.history.pushState(null, '/merchant');
   };
 
   handleClickSignupOpen = () => {
@@ -161,6 +196,7 @@ class ButtonAppBar extends React.Component {
 
   render() {
     const { classes } = this.props;
+
 
     return (
       <div className={classes.root}>
@@ -225,9 +261,9 @@ class ButtonAppBar extends React.Component {
                           className={classes.textField}
                           margin="normal"
                           variant="outlined"
-                          value={this.state.merchantID}
+                          value={this.merchantID}
                           onChange={evt => this.updateMerchantID(evt)}
-                          key={this.state.merchantExist}
+                          onKeyPress={evt => this.enterPressedID(evt)}
                         />
                       </DialogContentText>
                     </DialogContent>
@@ -241,6 +277,9 @@ class ButtonAppBar extends React.Component {
                           className={classes.textField}
                           margin="normal"
                           variant="outlined"
+                          value={this.password}
+                          onChange={evt => this.updateMerchantPassword(evt)}
+                          onKeyPress={evt => this.enterPressedPassword(evt)}
                         />
                       </DialogContentText>
                     </DialogContent>
@@ -248,17 +287,22 @@ class ButtonAppBar extends React.Component {
                       <Button onClick={this.handleLoginClick} color="primary">
                         Login
                       </Button>
-                    </DialogActions> 
-                    {this.state.merchantExist ? (
-                      <div/>
-                      ) : (
-                        <DialogContent ><Typography variant="h5">Account does not exist.</Typography></DialogContent>
-                    )}
-                    
+                    </DialogActions>
+                    {this.merchantExist ? (
+                      <div />
+                    ) : (
+                        <DialogContent ><Typography variant="h6">Account does not exist.</Typography></DialogContent>
+                      )}
+                    {this.passwordCorrect ? (
+                      <div />
+                    ) : (
+                        <DialogContent ><Typography variant="h6">Incorrect Password!</Typography></DialogContent>
+                      )}
+
                   </TabContainer>
 
                   <TabContainer dir={classes.direction}>
-                  <DialogTitle id="alert-dialog-slide-title">
+                    <DialogTitle id="alert-dialog-slide-title">
                       {"Log in to your account"}
                     </DialogTitle>
                     <DialogContent>
@@ -268,7 +312,7 @@ class ButtonAppBar extends React.Component {
                           required
                           id="outlined-required"
                           label="ID"
-                          defaultValue="Your account ID"
+                          defaultValue=""
                           className={classes.textField}
                           margin="normal"
                           variant="outlined"
@@ -281,7 +325,7 @@ class ButtonAppBar extends React.Component {
                           required
                           id="outlined-required"
                           label="Password"
-                          defaultValue="Password"
+                          defaultValue=""
                           className={classes.textField}
                           margin="normal"
                           variant="outlined"
@@ -379,7 +423,7 @@ class ButtonAppBar extends React.Component {
                   </TabContainer>
 
                   <TabContainer dir={classes.direction}>
-                  <DialogTitle id="alert-dialog-slide-title">
+                    <DialogTitle id="alert-dialog-slide-title">
                       {"Sign up for our shop"}
                     </DialogTitle>
                     <DialogContent>
@@ -464,8 +508,8 @@ class ButtonAppBar extends React.Component {
 
           </Toolbar>
           <img className={classes.canvas}
-        src={require('../../asset/landingPic.png')}
-      />
+            src={require('../../asset/landingPic.png')}
+          />
         </AppBar>
       </div>
     );

@@ -7,8 +7,10 @@ import HomeApp from './components/home/';
 import MerchantApp from './components/merchant/';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Header from './components/common/app/Header';
-import CanteenRouter from "./components/canteen/urls";
 import CustomerApp from "./components/customer/";
+import WoodenSearch from "./components/search/woodenSearch";
+import PencilSearch from "./components/search/pencilSearch";
+import CartApp from "./components/common/app/HeaderCart";
 import HeaderLoggedinMerchant from "./components/common/app/HeaderLoggedinMerchant";
 
 const history = createBrowserHistory();
@@ -31,41 +33,32 @@ const classes = theme => ({
 
 function LogInTrack(isLoggedIn) {
 	if (isLoggedIn) {
-		return <Header LogInTracker={isLoggedIn}/>;
+		return <Header LogInTracker={isLoggedIn} />;
 		console.log("in urls", isLoggedIn);
-	}else{
+	} else {
 		return <HeaderLoggedinMerchant />;
 		console.log("in urls", isLoggedIn);
 	}
 }
 
-class LoginControl extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = { isLoggedIn: false };
-	}
+const RootRouter = ({ classes }) => (
+	<Router history={history}>
+		<div className={classes.root}>
+			<main>
+				<Switch>
+					<Route exact path="/" component={HomeApp} />
+					<Route path="/merchant" component={MerchantApp} />
+					<Route path="/customer" component={CustomerApp} />
+					<Route path="/wooden" component={WoodenSearch} />
+					<Route path="/pencil" component={PencilSearch} />
+					<Route path="/cart" component={CartApp} />
+					<Route component={PageNotFound} />
+				</Switch>
+			</main>
+			<div id="outfox-footer-container" />
+		</div>
+	</Router>
+);
 
-	render() {
-		const isLoggedIn = this.state.isLoggedIn;
-		let button;
+export default withStyles(classes)(RootRouter);
 
-		return(
-		
-		<Router history={history}>
-			<div className={classes.root}>
-				<main>
-					<Switch>
-						<Route exact path="/" component={HomeApp} />
-						<Route path="/merchants" component={MerchantApp} />
-						<Route path="/customer" component={CustomerApp} />
-						<Route component={PageNotFound} />
-					</Switch>
-				</main>
-				<div id="outfox-footer-container" />
-			</div>
-		</Router>
-		);
-	}
-}
-
-export default withStyles(classes)(LoginControl);

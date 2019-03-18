@@ -24,17 +24,17 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/catogory/{catogory}", method = RequestMethod.GET)
-    public List<Product> getAllProductByCatogory(@PathVariable("catogory") String catogory) {
-        return productService.findProductByCatogory(catogory);
+    public String getAllProductByCatogory(@PathVariable("catogory") String catogory) {
+        return JSONConvert.JSONConverter(productService.findProductByCatogory(catogory));
     }
 
     @RequestMapping(value = "/product/{productID}", method = RequestMethod.GET)
-    public Product getProductByID(@PathVariable("productID") int productID){
-        return productService.findProductById(productID);
+    public String getProductByID(@PathVariable("productID") int productID){
+        return JSONConvert.JSONConverter(productService.findProductById(productID));
     }
 
     @RequestMapping(value = "/merchant/{merchantID}", method = RequestMethod.GET)
-    public List<Product> getProductByMerchantID(@PathVariable("merchantID") String merchantID){
-        return productService.findProductByMerchantID(merchantID);
+    public String getProductByMerchantID(@PathVariable("merchantID") String merchantID){
+        return JSONConvert.JSONConverter(productService.findProductByMerchantID(merchantID));
     }
 }

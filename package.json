@@ -12,6 +12,7 @@
     "axios": "^0.18.0",
     "classnames": "latest",
     "history": "latest",
+    "http-proxy-middleware": "^0.19.1",
     "jss": "next",
     "jss-nested": "latest",
     "mdi-material-ui": "^5.7.0",

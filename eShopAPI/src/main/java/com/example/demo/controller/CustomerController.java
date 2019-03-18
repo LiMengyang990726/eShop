@@ -1,14 +1,12 @@
 package com.example.demo.controller;
 
+import com.example.demo.config.JSONConvert;
 import com.example.demo.model.Customer;
 import com.example.demo.model.Merchant;
 import com.example.demo.service.CustomerService;
 import com.example.demo.service.MerchantService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,9 +18,9 @@ public class CustomerController {
     private CustomerService customerService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public List<Customer> getAllCustomer() {
+    public String getAllCustomer() {
         List<Customer> customers = customerService.findAll();
-        return customers;
+        return JSONConvert.JSONConverter(customers);
     }
 
     @RequestMapping(value = "/{customerID}", method = RequestMethod.GET)
@@ -33,14 +31,14 @@ public class CustomerController {
 
 
     // TODO: HAVAN'T SOLVED MULTIPLE PATHVARIABLES
-    @RequestMapping(value = "/customer/{customerID}/password/{password}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{customerID}/password/{password}", method = RequestMethod.GET)
     public boolean checkPassword(@PathVariable("customerID") String customerID, @PathVariable("password") String password){
         return customerService.findByCustomerID(customerID).getPassword().equals(password);
     }
 
-    @RequestMapping(value = "/post/{customer}", method = RequestMethod.POST)
-    public Customer addCustomer(@PathVariable("customer") Customer customer){
-        return customerService.save(customer);
+    @RequestMapping(value = "/post", method = RequestMethod.POST)
+    public String addCustomer(@RequestBody Customer customer){
+        return JSONConvert.JSONConverter(customerService.save(customer));
     }
 
 }
