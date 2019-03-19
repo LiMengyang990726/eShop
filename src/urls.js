@@ -10,7 +10,7 @@ import Header from './components/common/app/Header';
 import CustomerApp from "./components/customer/";
 import WoodenSearch from "./components/search/woodenSearch";
 import PencilSearch from "./components/search/pencilSearch";
-import CartApp from "./components/common/app/HeaderCart";
+import CartApp from "./components/cart/index";
 import HeaderLoggedinMerchant from "./components/common/app/HeaderLoggedinMerchant";
 
 const history = createBrowserHistory();

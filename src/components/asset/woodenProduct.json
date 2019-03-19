@@ -1,0 +1,42 @@
+[
+    {
+        "productID": 1, 
+        "merchantID":"221", 
+        "price": 48.0, 
+        "description":"Burgundy: For the Hopeless Romantic. Write with elegance and charm and adorn your life with a splash of this luxurious sheen. Made from Mahogany wood.",
+        "image":"https://cdn11.bigcommerce.com/s-ngj8xv09kn/images/stencil/1280x1280/products/414/2238/Wood_Pen_Rosewood_Wide_with_logo__42226.1510468652.jpg",
+        "catogory": "Wooden pen"
+    },
+    {
+        "productID": 2, 
+        "merchantID":"221", 
+        "price": 36.5, 
+        "description":"Forest: For the nature-loving.Crafted from maple wood, the wood is taken raw and lacquered with beeswax, embodying an organic and natural look.",
+        "image":"https://cdn.shopify.com/s/files/1/1246/1227/products/Allrounder_wooden_pen_grande.jpg",
+        "catogory": "Wooden pen"
+    },
+    {
+        "productID": 3, 
+        "merchantID":"222", 
+        "price": 24.5, 
+        "description":"With a blank slate, this ash wooden pen ridden with intricacies will be accompanying you in filling that up.",
+        "image":"https://cdn.shopify.com/s/files/1/1395/9647/products/Ambrosia_Bolt_Action_BAAMB_-3.jpg",
+        "catogory": "Wooden pen"
+    },
+    {
+        "productID": 4, 
+        "merchantID":"222", 
+        "price": 15.8, 
+        "description":"Less is more, an admirable life motto, and certainly what Minimalistic is sticking to. Made from Maple wood.",
+        "image":"https://cdn.shopify.com/s/files/1/1143/0392/products/Pen-Maple.jpg",
+        "catogory": "Wooden pen"
+    },
+    {
+        "productID": 5, 
+        "merchantID":"223", 
+        "price": 56.9, 
+        "description":"Coral is the pen meant for those with a vibrant and bubbly disposition! Taking it easy with life yet excited for everything that is coming their way, this pen will accompany you through your adventures.",
+        "image":"https://img-aws.ehowcdn.com/877x500p/cpi.studiod.com/www_ehow_com/photos.demandstudios.com/162/128/fotolia_3059857_XS.jpg",
+        "catogory": "Wooden pen"
+    } 
+]

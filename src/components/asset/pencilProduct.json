@@ -1,0 +1,26 @@
+[
+    {
+        "productID": 6, 
+        "merchantID":"223", 
+        "price": 7.5, 
+        "description":"Made of exquisite graphite. 5B",
+        "image":"http://4.bp.blogspot.com/_QI5GpCAOFDk/SdmE3LPYW2I/AAAAAAAABec/_ArAI_CZyUU/s400/pencil_warrior.jpg",
+        "catogory": "Pencil"
+    },
+    {
+        "productID": 7, 
+        "merchantID":"224", 
+        "price": 48.5, 
+        "description":"Forest: For the nature-loving.Crafted from maple wood, the wood is taken raw and lacquered with beeswax, embodying an organic and natural look.",
+        "image":"https://cdn.shopify.com/s/files/1/1246/1227/products/Allrounder_wooden_pen_grande.jpg",
+        "catogory": "Pencil"
+    },
+    {
+        "productID": 8, 
+        "merchantID":"225", 
+        "price": 1000.5, 
+        "description":"Stunning pair of Early Victorian 15ct Gold Propelling Pencils, both in excellent condition and in full working order. Made of pure gold.",
+        "image":"https://images.antiquesatlas.com/dealer-stock-images/blackwoodantiques/Antique_15ct_Gold_Victorian_Pr_as446a034b.jpg",
+        "catogory": "Pencil"
+    }
+]

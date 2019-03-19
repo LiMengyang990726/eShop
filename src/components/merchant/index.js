@@ -133,22 +133,22 @@ class MerchantApp extends React.Component {
                                         <Grid item xs={9}>
                                             <Grid container>
                                                 <Typography component="h5" variant="h5">
-                                                    Product ID:
+                                                    Product ID: 1
                                                 </Typography>
                                             </Grid>
                                             <Grid container>
                                                 <Typography variant="subtitle1" color="textSecondary">
-                                                    Price:
+                                                    Price: 48.0
                                                 </Typography>
                                             </Grid>
                                             <Grid container>
                                                 <Typography variant="subtitle1" color="textSecondary">
-                                                    Quantity:
+                                                    Quantity: 2
                                                 </Typography>
                                             </Grid>
                                             <Grid container>
                                                 <Typography variant="subtitle1" color="textSecondary">
-                                                    Customer:
+                                                    Customer: 112
                                                 </Typography>
                                             </Grid>
                                         </Grid>
@@ -178,22 +178,22 @@ class MerchantApp extends React.Component {
                                         <Grid item xs={9}>
                                             <Grid container>
                                                 <Typography component="h5" variant="h5">
-                                                    Product ID:
+                                                    Product ID: 1
                                                 </Typography>
                                             </Grid>
                                             <Grid container>
                                                 <Typography variant="subtitle1" color="textSecondary">
-                                                    Price:
+                                                    Price: 48.0
                                                 </Typography>
                                             </Grid>
                                             <Grid container>
                                                 <Typography variant="subtitle1" color="textSecondary">
-                                                    Description:
+                                                    Description: Burgundy: For the Hopeless Romantic. Write with elegance and charm and adorn your life with a splash of this luxurious sheen. Made from Mahogany wood.
                                                 </Typography>
                                             </Grid>
                                             <Grid container>
                                                 <Typography variant="subtitle1" color="textSecondary">
-                                                    Catogory:
+                                                    Catogory: Wooden Pen
                                                 </Typography>
                                             </Grid>
                                         </Grid>

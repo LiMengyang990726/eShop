@@ -92,148 +92,173 @@ const styles = theme => ({
   },
 });
 
-function home(props) {
-  const { classes } = props;
+class home extends React.Component {
+  constructor(props) {
+    super(props);
+    this.searchContent = "";
+  }
+
+  handleSearchContent(evt){
+    this.searchContent = evt.target.value;
+    this.setState({
+      searchContent: evt.target.value
+    });
+    console.log(this.searchContent);
+  }
+
+  handleSearch = (evt) =>{
+    var code = evt.keyCode || evt.which;
+    if(code === 13){
+      if(this.searchContent === "wooden pen"){
+        window.open('/wooden');
+      }else if(this.searchContent === "pencil"){
+        window.open('/pencil');
+      }
+    }
+    
+  }
+  render() {
+    const { classes } = this.props;
+
+    return (
+      <div className={classes.root}>
 
 
-  return (
-    <div className={classes.root}>
-
-
-      <div className={classes.search}>
-        <div className={classes.searchIcon}>
-          <SearchIcon style={{ cursor: "pointer", pointerEvents: "all" }} />
+        <div className={classes.search}>
+          <div className={classes.searchIcon}>
+            <SearchIcon style={{ cursor: "pointer", pointerEvents: "all" }} />
+          </div>
+          <InputBase
+            placeholder="Search…"
+            classes={{
+              root: classes.inputRoot,
+              input: classes.inputInput,
+            }}
+            value={this.searchContent}
+            onChange={evt=>{this.handleSearchContent(evt)}}
+            onKeyPress={evt=>{this.handleSearch(evt)}}
+          />
         </div>
-        <InputBase
-          placeholder="Search…"
-          classes={{
-            root: classes.inputRoot,
-            input: classes.inputInput,
-          }}
-        />
-      </div>
 
-      <div className={classes.divider}>
-        <Divider />
-      </div>
+        <div className={classes.divider}>
+          <Divider />
+        </div>
 
-      <div className={classes.hot}>
-        <Typography variant="h4" gutterBottom stype={{ marginLeft: "10%" }}>
-          Featured
-      </Typography>
-      </div>
+        <div className={classes.hot}>
+          <Typography variant="h4" gutterBottom stype={{ marginLeft: "10%" }}>
+            Featured
+</Typography>
+        </div>
 
-      <div className={classes.slideshowContainer}>
-        <Slide {...properties}>
-          <div className="each-slide">
-            <div className={classes.slideshow} style={{ 'backgroundImage': `url(${slideImages[0]})` }}>
+        <div className={classes.slideshowContainer}>
+          <Slide {...properties}>
+            <div className="each-slide">
+              <div className={classes.slideshow} style={{ 'backgroundImage': `url(${slideImages[0]})` }}>
 
+              </div>
             </div>
-          </div>
-          <div className="each-slide">
-            <div className={classes.slideshow} style={{ 'backgroundImage': `url(${slideImages[1]})` }}>
+            <div className="each-slide">
+              <div className={classes.slideshow} style={{ 'backgroundImage': `url(${slideImages[1]})` }}>
 
+              </div>
             </div>
-          </div>
-          <div className="each-slide">
-            <div className={classes.slideshow} style={{ 'backgroundImage': `url(${slideImages[2]})` }}>
+            <div className="each-slide">
+              <div className={classes.slideshow} style={{ 'backgroundImage': `url(${slideImages[2]})` }}>
 
+              </div>
             </div>
-          </div>
-        </Slide>
-      </div>
+          </Slide>
+        </div>
 
-      <div className={classes.divider}>
-        <Divider />
-      </div>
+        <div className={classes.divider}>
+          <Divider />
+        </div>
 
-      <div className={classes.hot}>
-        <Typography variant="h4" gutterBottom stype={{ marginLeft: "10%" }}>
-          Hot
-      </Typography>
+        <div className={classes.hot}>
+          <Typography variant="h4" gutterBottom stype={{ marginLeft: "10%" }}>
+            Hot
+</Typography>
 
-        <Grid container spacing={24}>
-          <Grid item xs={4}>
-            <Card className={classes.card}>
-              <CardActionArea>
-                <CardMedia
-                  className={classes.media}
-                  image="https://www.texascrazy.com/wp-content/uploads/2016/02/texas-pen-set-f.jpg"
-                  title="Contemplative Reptile"
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="h2">
-                    Classical Wooden Pen
-                  </Typography>
-                  <Typography component="p">
-                    Consists of a metal nib with capillary channels, like that of a fountain pen, mounted on a handle or holder, often made of wood. A dip pen usually has no ink reservoir and must be repeatedly recharged with ink while drawing or writing. 
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-              <CardActions>
-                <Button size="small" color="primary">
-                  Add to cart
-                </Button>
-              </CardActions>
-            </Card>
+          <Grid container spacing={24}>
+            <Grid item xs={4}>
+              <Card className={classes.card}>
+                <CardActionArea>
+                  <CardMedia
+                    className={classes.media}
+                    image="https://www.texascrazy.com/wp-content/uploads/2016/02/texas-pen-set-f.jpg"
+                    title="Contemplative Reptile"
+                  />
+                  <CardContent>
+                    <Typography gutterBottom variant="h5" component="h2">
+                      Classical Wooden Pen
+            </Typography>
+                    <Typography component="p">
+                      Consists of a metal nib with capillary channels, like that of a fountain pen, mounted on a handle or holder, often made of wood. A dip pen usually has no ink reservoir and must be repeatedly recharged with ink while drawing or writing.
+            </Typography>
+                  </CardContent>
+                </CardActionArea>
+                <CardActions>
+                  <Button size="small" color="primary">
+                    Add to cart
+          </Button>
+                </CardActions>
+              </Card>
+            </Grid>
+
+            <Grid item xs={4}>
+              <Card className={classes.card}>
+                <CardActionArea>
+                  <CardMedia
+                    className={classes.media}
+                    image="https://www.texascrazy.com/wp-content/uploads/2016/02/texas-pen-set-f.jpg"
+                    title="Contemplative Reptile"
+                  />
+                  <CardContent>
+                    <Typography gutterBottom variant="h5" component="h2">
+                      Classical Wooden Pen
+            </Typography>
+                    <Typography component="p">
+                      Consists of a metal nib with capillary channels, like that of a fountain pen, mounted on a handle or holder, often made of wood. A dip pen usually has no ink reservoir and must be repeatedly recharged with ink while drawing or writing.
+            </Typography>
+                  </CardContent>
+                </CardActionArea>
+                <CardActions>
+                  <Button size="small" color="primary">
+                    Add to cart
+          </Button>
+                </CardActions>
+              </Card>
+            </Grid>
+
+            <Grid item xs={4}>
+              <Card className={classes.card}>
+                <CardActionArea>
+                  <CardMedia
+                    className={classes.media}
+                    image="https://www.texascrazy.com/wp-content/uploads/2016/02/texas-pen-set-f.jpg"
+                    title="Contemplative Reptile"
+                  />
+                  <CardContent>
+                    <Typography gutterBottom variant="h5" component="h2">
+                      Classical Wooden Pen
+            </Typography>
+                    <Typography component="p">
+                      Consists of a metal nib with capillary channels, like that of a fountain pen, mounted on a handle or holder, often made of wood. A dip pen usually has no ink reservoir and must be repeatedly recharged with ink while drawing or writing.
+            </Typography>
+                  </CardContent>
+                </CardActionArea>
+                <CardActions>
+                  <Button size="small" color="primary">
+                    Add to cart
+          </Button>
+                </CardActions>
+              </Card>
+            </Grid>
           </Grid>
-
-          <Grid item xs={4}>
-            <Card className={classes.card}>
-              <CardActionArea>
-                <CardMedia
-                  className={classes.media}
-                  image="https://www.texascrazy.com/wp-content/uploads/2016/02/texas-pen-set-f.jpg"
-                  title="Contemplative Reptile"
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="h2">
-                    Classical Wooden Pen
-                  </Typography>
-                  <Typography component="p">
-                    Consists of a metal nib with capillary channels, like that of a fountain pen, mounted on a handle or holder, often made of wood. A dip pen usually has no ink reservoir and must be repeatedly recharged with ink while drawing or writing.
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-              <CardActions>
-                <Button size="small" color="primary">
-                  Add to cart
-                </Button>
-              </CardActions>
-            </Card>
-          </Grid>
-
-          <Grid item xs={4}>
-            <Card className={classes.card}>
-              <CardActionArea>
-                <CardMedia
-                  className={classes.media}
-                  image="https://www.texascrazy.com/wp-content/uploads/2016/02/texas-pen-set-f.jpg"
-                  title="Contemplative Reptile"
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="h2">
-                    Classical Wooden Pen
-                  </Typography>
-                  <Typography component="p">
-                  Consists of a metal nib with capillary channels, like that of a fountain pen, mounted on a handle or holder, often made of wood. A dip pen usually has no ink reservoir and must be repeatedly recharged with ink while drawing or writing.
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-              <CardActions>
-                <Button size="small" color="primary">
-                  Add to cart
-                </Button>
-              </CardActions>
-            </Card>
-          </Grid>
-        </Grid>
+        </div>
       </div>
-    </div>
-
-
-
-  );
+    );
+  }
 }
 
 home.propTypes = {

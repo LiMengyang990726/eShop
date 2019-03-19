@@ -1,0 +1,20 @@
+[
+    {
+        "productID": 8, 
+        "merchantID":"225", 
+        "price": 1000.5, 
+        "description":"Stunning pair of Early Victorian 15ct Gold Propelling Pencils, both in excellent condition and in full working order. Made of pure gold.",
+        "image":"https://images.antiquesatlas.com/dealer-stock-images/blackwoodantiques/Antique_15ct_Gold_Victorian_Pr_as446a034b.jpg",
+        "catogory": "Pencil",
+        "qty": 1
+    },
+    {
+        "productID": 1, 
+        "merchantID":"221", 
+        "price": 48.0, 
+        "description":"Burgundy: For the Hopeless Romantic. Write with elegance and charm and adorn your life with a splash of this luxurious sheen. Made from Mahogany wood.",
+        "image":"https://cdn11.bigcommerce.com/s-ngj8xv09kn/images/stencil/1280x1280/products/414/2238/Wood_Pen_Rosewood_Wide_with_logo__42226.1510468652.jpg",
+        "catogory": "Wooden pen",
+        "qty":2
+    }
+]

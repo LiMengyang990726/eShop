@@ -111,13 +111,49 @@ class ButtonAppBar extends React.Component {
     this.merchantExist = true;
     this.password = '';
     this.passwordCorrect = true;
+    this.signuppassword =  '';
+    this.signupconfirmPassword = '';
+
+    this.signupCustomerID = '';
+    this.signupCustomerPassword = '';
+    this.creditCardNo = '';
+    this.creditCardCVV = '';
   }
 
   state = {
     openLogin: false,
     openSignup: false,
     value: 0,
+    
   };
+
+  getCustomerID(evt){
+    this.signupCustomerID = evt.target.value;
+    this.setState({
+      signupCustomerID:evt.target.value
+    })
+  }
+
+  getCustomerPassword(evt){
+    this.signupCustomerPassword = evt.target.value;
+    this.setState({
+      signupCustomerPassword:evt.target.value
+    })
+  }
+
+  getCustomerCard(evt){
+    this.creditCardNo = evt.target.value;
+    this.setState({
+      creditCardNo:evt.target.value
+    })
+  }
+
+  getCustomerCardCVV(evt){
+    this.creditCardCVV = evt.target.value;
+    this.setState({
+      creditCardCVV:evt.target.value
+    })
+  }
 
   updateMerchantID(evt) {
     this.merchantID = evt.target.value;
@@ -135,6 +171,22 @@ class ButtonAppBar extends React.Component {
     console.log(this.password);
   }
 
+  passwordSignUp(evt){
+    this.signuppassword = evt.target.value;
+    this.setState({
+      signuppassword: evt.target.value
+    });
+    console.log(this.signuppassword);
+  }
+
+  confirmpasswordSignUp(evt){
+    this.signupconfirmPassword = evt.target.value;
+    this.setState({
+      signupconfirmPassword: evt.target.value
+    });
+    console.log(this.signupconfirmPassword);
+  }
+
   handleClickLoginOpen = () => {
     this.setState({ openLogin: true });
   };
@@ -146,7 +198,7 @@ class ButtonAppBar extends React.Component {
   enterPressedPassword = (evt) =>{
     var code = evt.keyCode || evt.which;
     if(code === 13) { //13 is the enter keycode
-      var requestUrl = '/merchant/'+this.merchantID+'/password/'+this.password;
+      var requestUrl = '/api/'+'merchant/'+this.merchantID+'/password/'+this.password;
       fetch(requestUrl)
       .then(response => {
         response.text().then(data => {
@@ -161,7 +213,7 @@ class ButtonAppBar extends React.Component {
   enterPressedID = (evt) =>{
     var code = evt.keyCode || evt.which;
     if(code === 13) { //13 is the enter keycode
-      var requestUrl = '/merchant/'+this.merchantID;
+      var requestUrl = '/api/'+'merchant/'+this.merchantID;
       fetch(requestUrl)
       .then(response => {
         response.text().then(data => {
@@ -173,17 +225,72 @@ class ButtonAppBar extends React.Component {
     console.log("If the merchant exists "+this.passwordCorrect);
   }
 
+  enterPressedConfirmPassword = (evt) => {
+      console.log("singup password " + this.signuppassword);
+      console.log("confirm password " + this.signupconfirmPassword);
+      var code = evt.keyCode || evt.which;
+      if(code === 13){
+        if (this.signuppassword !== this.signupconfirmPassword) {
+          alert("Passwords don't match");
+      } else {
+        
+      }
+      }
+      
+  }
   handleLoginClick = () => {
     this.setState({ openLogin: false });
-    this.history.pushState(null, '/merchant');
+    window.open("/merchant");
+  };
+
+  handleLoginClickCustomer = () => {
+    this.setState({ openLogin: false });
+    window.open("/customer");
   };
 
   handleClickSignupOpen = () => {
     this.setState({ openSignup: true });
   };
 
-  handleSignupClose = () => {
+  handleSignupCloseMerchant = () => {
     this.setState({ openSignup: false });
+    alert("Account created successfully");
+    fetch('/api/'+'customer/',{
+      method: "GET",
+      mode: "no-cors",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        // "Content-Type": "application/x-www-form-urlencoded",
+    },
+    })
+      .then(response => {
+        response.text().then(data => {
+          console.log(data);
+        })
+      })
+  };
+
+  handleSignupCloseCustomer = () => {
+    this.setState({ openSignup: false });
+    alert("Account created successfully");
+    var requestUrl='/api/'+'customer/post';
+    var data = {"customerID":this.signupCustomerID,
+            "password":this.signupCustomerPassword,
+            "bank_account":this.creditCardNo,
+            "CVV":this.creditCardCVV};
+
+    fetch(requestUrl, {
+      method: "POST", 
+      mode: "no-cors", 
+      headers: {
+          "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data), // body data type must match "Content-Type" header
+  })
+  .then(response => {
+        console.log(response.text())
+      });
   };
 
   handleChange = (event, value) => {
@@ -333,7 +440,7 @@ class ButtonAppBar extends React.Component {
                       </DialogContentText>
                     </DialogContent>
                     <DialogActions>
-                      <Button onClick={this.handleLoginClose} color="primary">
+                      <Button onClick={this.handleLoginClickCustomer} color="primary">
                         Login
                       </Button>
                     </DialogActions>
@@ -382,7 +489,7 @@ class ButtonAppBar extends React.Component {
                           required
                           id="outlined-required"
                           label="ID"
-                          defaultValue="Your account ID"
+                          defaultValue=""
                           className={classes.textField}
                           margin="normal"
                           variant="outlined"
@@ -395,10 +502,12 @@ class ButtonAppBar extends React.Component {
                           required
                           id="outlined-required"
                           label="Password"
-                          defaultValue="Password"
+                          defaultValue=""
                           className={classes.textField}
                           margin="normal"
                           variant="outlined"
+                          value={this.signuppassword}
+                          onChange={evt => this.passwordSignUp(evt)}
                         />
                       </DialogContentText>
                     </DialogContent>
@@ -408,15 +517,18 @@ class ButtonAppBar extends React.Component {
                           required
                           id="outlined-required"
                           label="Confirm Password"
-                          defaultValue="Confirm Password"
+                          defaultValue=""
                           className={classes.textField}
                           margin="normal"
                           variant="outlined"
+                          value={this.signupconfirmPassword}
+                          onChange={evt=>this.confirmpasswordSignUp(evt)}
+                          onKeyPress={evt => this.enterPressedConfirmPassword(evt)}
                         />
                       </DialogContentText>
                     </DialogContent>
                     <DialogActions>
-                      <Button onClick={this.handleSignupClose} color="primary">
+                      <Button onClick={this.handleSignupCloseMerchant} color="primary">
                         Signup
                       </Button>
                     </DialogActions>
@@ -433,10 +545,12 @@ class ButtonAppBar extends React.Component {
                           required
                           id="outlined-required"
                           label="ID"
-                          defaultValue="Your account ID"
+                          defaultValue=""
                           className={classes.textField}
                           margin="normal"
                           variant="outlined"
+                          value={this.signupCustomerID}
+                          onChange={evt=>this.getCustomerID(evt)}
                         />
                       </DialogContentText>
                     </DialogContent>
@@ -446,10 +560,12 @@ class ButtonAppBar extends React.Component {
                           required
                           id="outlined-required"
                           label="Password"
-                          defaultValue="Password"
+                          defaultValue=""
                           className={classes.textField}
                           margin="normal"
                           variant="outlined"
+                          value={this.signupCustomerPassword}
+                          onChange={evt=>this.getCustomerPassword(evt)}
                         />
                       </DialogContentText>
                     </DialogContent>
@@ -459,7 +575,7 @@ class ButtonAppBar extends React.Component {
                           required
                           id="outlined-required"
                           label="Confirm Password"
-                          defaultValue="Confirm Password"
+                          defaultValue=""
                           className={classes.textField}
                           margin="normal"
                           variant="outlined"
@@ -472,10 +588,12 @@ class ButtonAppBar extends React.Component {
                           required
                           id="outlined-required"
                           label="Credit Card Number"
-                          defaultValue="E.g. 1234 4321 1234 4321"
+                          defaultValue=""
                           className={classes.textField}
                           margin="normal"
                           variant="outlined"
+                          value={this.creditCardNo}
+                          onChange={evt=>this.getCustomerCard(evt)}
                         />
                       </DialogContentText>
                     </DialogContent>
@@ -485,15 +603,17 @@ class ButtonAppBar extends React.Component {
                           required
                           id="outlined-required"
                           label="Credit Card CVV"
-                          defaultValue="E.g. 123"
+                          defaultValue=""
                           className={classes.textField}
                           margin="normal"
                           variant="outlined"
+                          value={this.creditCardCVV}
+                          onChange={evt=>this.getCustomerCardCVV(evt)}
                         />
                       </DialogContentText>
                     </DialogContent>
                     <DialogActions>
-                      <Button onClick={this.handleSignupClose} color="primary">
+                      <Button onClick={this.handleSignupCloseCustomer} color="primary">
                         Signup
                       </Button>
                     </DialogActions>
@@ -521,7 +641,3 @@ ButtonAppBar.propTypes = {
 };
 
 export default withStyles(styles)(ButtonAppBar);
-
-
-
-
